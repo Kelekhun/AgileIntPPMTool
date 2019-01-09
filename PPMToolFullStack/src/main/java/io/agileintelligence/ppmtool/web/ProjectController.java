@@ -51,6 +51,7 @@ public class ProjectController {
 
 	}
 	
+	
 	@GetMapping("/all")
 	public Iterable<Project> getAllProjects(){
 		return projectService.findAllProjects();
