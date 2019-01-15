@@ -23,7 +23,7 @@ public class ProjectTask {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(updatable = false)
+	@Column(updatable = false, unique = true)
 	private String projectSequence;
 	@NotBlank(message = "Please include a project summary")
 	private String summary;
@@ -40,7 +40,7 @@ public class ProjectTask {
 
 	@Column(updatable = false)
 	private String projectIdentifier;
-	
+
 	private Date create_At;
 	private Date update_At;
 
