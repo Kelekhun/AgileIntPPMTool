@@ -15,6 +15,8 @@ import javax.persistence.PreUpdate;
 import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 public class ProjectTask {
 
@@ -28,16 +30,19 @@ public class ProjectTask {
     private String acceptanceCriteria;
     private String status;
     private Integer priority;
+    @JsonFormat(pattern = "yyyy-mm-dd")
     private Date dueDate;
     //ManyToOne with Backlog
-    @ManyToOne(fetch = FetchType.EAGER) //REMOVE REFRESH
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="backlog_id", updatable = false, nullable = false)
     @JsonIgnore
     private Backlog backlog;
 
     @Column(updatable = false)
     private String projectIdentifier;
+    @JsonFormat(pattern = "yyyy-mm-dd")
     private Date create_At;
+    @JsonFormat(pattern = "yyyy-mm-dd")
     private Date update_At;
 
     public ProjectTask() {
@@ -141,13 +146,20 @@ public class ProjectTask {
         this.update_At = new Date();
     }
 
-	@Override
-	public String toString() {
-		return "ProjectTask [id=" + id + ", projectSequence=" + projectSequence + ", summary=" + summary
-				+ ", acceptanceCriteria=" + acceptanceCriteria + ", status=" + status + ", priority=" + priority
-				+ ", dueDate=" + dueDate + ", backlog=" + backlog + ", projectIdentifier=" + projectIdentifier
-				+ ", create_At=" + create_At + ", update_At=" + update_At + "]";
-	}
-
-    
+    @Override
+    public String toString() {
+        return "ProjectTask{" +
+                "id=" + id +
+                ", projectSequence='" + projectSequence + '\'' +
+                ", summary='" + summary + '\'' +
+                ", acceptanceCriteria='" + acceptanceCriteria + '\'' +
+                ", status='" + status + '\'' +
+                ", priority=" + priority +
+                ", dueDate=" + dueDate +
+                ", backlog=" + backlog +
+                ", projectIdentifier='" + projectIdentifier + '\'' +
+                ", create_At=" + create_At +
+                ", update_At=" + update_At +
+                '}';
+    }
 }
